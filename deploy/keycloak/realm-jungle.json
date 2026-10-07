@@ -1,0 +1,290 @@
+{
+  "realm": "jungle",
+  "enabled": true,
+  "displayName": "Jungle Test",
+  "sslRequired": "none",
+  "accessTokenLifespan": 300,
+  "roles": {
+    "realm": [
+      {
+        "name": "wagering-provider",
+        "description": "Game provider: submits and reads its own wager transactions"
+      },
+      {
+        "name": "wallet-operator",
+        "description": "Internal service: wallet operations and reading any transaction"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "provider-a",
+      "name": "provider-a",
+      "description": "Game provider A (client_credentials)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "provider-a-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "jungle-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.custom.audience": "jungle-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "provider-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-hardcoded-claim-mapper",
+          "config": {
+            "claim.name": "provider_id",
+            "claim.value": "provider-a",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ],
+      "attributes": {}
+    },
+    {
+      "clientId": "provider-b",
+      "name": "provider-b",
+      "description": "Game provider B (client_credentials)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "provider-b-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "jungle-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.custom.audience": "jungle-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "provider-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-hardcoded-claim-mapper",
+          "config": {
+            "claim.name": "provider_id",
+            "claim.value": "provider-b",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ],
+      "attributes": {}
+    },
+    {
+      "clientId": "provider-a-shortlived",
+      "name": "provider-a-shortlived",
+      "description": "Provider A with 3s tokens (expiry tests)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "provider-a-shortlived-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "jungle-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.custom.audience": "jungle-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "provider-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-hardcoded-claim-mapper",
+          "config": {
+            "claim.name": "provider_id",
+            "claim.value": "provider-a",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ],
+      "attributes": {
+        "access.token.lifespan": "3"
+      }
+    },
+    {
+      "clientId": "wallet-service",
+      "name": "wallet-service",
+      "description": "Internal wallet service",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "wallet-service-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "jungle-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.custom.audience": "jungle-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ],
+      "attributes": {}
+    },
+    {
+      "clientId": "no-role-client",
+      "name": "no-role-client",
+      "description": "Authenticated client without roles (authorization tests)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "no-role-client-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "jungle-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.custom.audience": "jungle-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ],
+      "attributes": {}
+    },
+    {
+      "clientId": "other-audience-client",
+      "name": "other-audience-client",
+      "description": "Provider role but token not issued for jungle-api",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "other-audience-client-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "provider-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-hardcoded-claim-mapper",
+          "config": {
+            "claim.name": "provider_id",
+            "claim.value": "provider-a",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ],
+      "attributes": {}
+    }
+  ],
+  "users": [
+    {
+      "username": "service-account-provider-a",
+      "enabled": true,
+      "serviceAccountClientId": "provider-a",
+      "realmRoles": [
+        "wagering-provider"
+      ]
+    },
+    {
+      "username": "service-account-provider-b",
+      "enabled": true,
+      "serviceAccountClientId": "provider-b",
+      "realmRoles": [
+        "wagering-provider"
+      ]
+    },
+    {
+      "username": "service-account-provider-a-shortlived",
+      "enabled": true,
+      "serviceAccountClientId": "provider-a-shortlived",
+      "realmRoles": [
+        "wagering-provider"
+      ]
+    },
+    {
+      "username": "service-account-wallet-service",
+      "enabled": true,
+      "serviceAccountClientId": "wallet-service",
+      "realmRoles": [
+        "wallet-operator"
+      ]
+    },
+    {
+      "username": "service-account-no-role-client",
+      "enabled": true,
+      "serviceAccountClientId": "no-role-client",
+      "realmRoles": []
+    },
+    {
+      "username": "service-account-other-audience-client",
+      "enabled": true,
+      "serviceAccountClientId": "other-audience-client",
+      "realmRoles": [
+        "wagering-provider"
+      ]
+    }
+  ]
+}

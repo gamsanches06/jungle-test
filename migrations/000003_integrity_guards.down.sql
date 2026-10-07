@@ -1,0 +1,17 @@
+BEGIN;
+DROP TRIGGER IF EXISTS inbox_messages_guard_row ON inbox_messages;
+DROP TRIGGER IF EXISTS outbox_events_guard_row ON outbox_events;
+DROP TRIGGER IF EXISTS wager_transactions_guard_row ON wager_transactions;
+DROP TRIGGER IF EXISTS wallets_balance_has_ledger ON wallets;
+DROP TRIGGER IF EXISTS wallets_guard_row ON wallets;
+DROP TRIGGER IF EXISTS wallet_ledger_entries_transaction_check ON wallet_ledger_entries;
+DROP TRIGGER IF EXISTS wallet_ledger_entries_no_truncate ON wallet_ledger_entries;
+DROP TRIGGER IF EXISTS wallet_ledger_entries_no_update_delete ON wallet_ledger_entries;
+DROP FUNCTION IF EXISTS inbox_messages_guard();
+DROP FUNCTION IF EXISTS outbox_events_guard();
+DROP FUNCTION IF EXISTS wager_transactions_guard();
+DROP FUNCTION IF EXISTS wallets_require_ledger();
+DROP FUNCTION IF EXISTS wallets_guard();
+DROP FUNCTION IF EXISTS ledger_check_transaction();
+DROP FUNCTION IF EXISTS ledger_forbid_mutation();
+COMMIT;
